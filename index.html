@@ -714,7 +714,7 @@
     const open = navLinks.style.display === 'flex';
     navLinks.style.cssText = open ? '' : 'display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--stone);padding:20px 32px;border-bottom:1px solid var(--line);gap:18px;';
   });
-
+  console.log(document.getElementById("formulario"));
   document.getElementById("formulario").addEventListener("submit", function(e) {
 
     e.preventDefault();

@@ -709,6 +709,26 @@
     const open = navLinks.style.display === 'flex';
     navLinks.style.cssText = open ? '' : 'display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--stone);padding:20px 32px;border-bottom:1px solid var(--line);gap:18px;';
   });
+
+  document.getElementById("formulario").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const nome = document.getElementById("nome").value;
+    const telefone = document.getElementById("telefone").value;
+    const email = document.getElementById("email").value;
+
+    const mensagem =
+`Olá! Tenho interesse na clínica.
+
+Nome: ${nome}
+Telefone: ${telefone}
+E-mail: ${email}`;
+
+    window.open(
+        `https://wa.me/5541999999999?text=${encodeURIComponent(mensagem)}`,
+        "_blank"
+    );
+});
 </script>
 
 </body>

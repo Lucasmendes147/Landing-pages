@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clínica de Curitiba— Curitiba, desde 1999</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --stone:#ECE7DE;
+    --stone-deep:#E1D9CB;
+    --porcelain:#FBF9F5;
+    --ink:#231F1B;
+    --ink-soft:#4A443D;
+    --sage:#6E7A5E;
+    --sage-deep:#4C5641;
+    --rose:#C99C86;
+    --rose-deep:#A97457;
+    --line: rgba(35,31,28,0.12);
+    --line-strong: rgba(35,31,28,0.22);
+    --shadow: 0 20px 50px -25px rgba(35,31,28,0.35);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--stone);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  ul{list-style:none;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--sage-deep);
+    font-weight:500;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:'';
+    width:22px;height:1px;
+    background:var(--sage-deep);
+    display:inline-block;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    color:var(--ink);
+    letter-spacing:-0.01em;
+  }
+  h1 em, h2 em{font-style:italic;font-weight:400;color:var(--sage-deep);}
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:15px 28px;
+    border-radius:2px;
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:14.5px;
+    letter-spacing:0.01em;
+    cursor:pointer;
+    border:1px solid transparent;
+    transition:all .25s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{background:var(--ink);color:var(--porcelain);}
+  .btn-primary:hover{background:var(--sage-deep);}
+  .btn-ghost{border-color:var(--line-strong);color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--ink);background:rgba(35,31,28,0.04);}
+  .btn-arrow{transition:transform .25s ease;}
+  .btn:hover .btn-arrow{transform:translateX(3px);}
+
+  /* HEADER */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(236,231,222,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px 32px;max-width:1180px;margin:0 auto;
+  }
+  .logo{
+    font-family:'Fraunces',serif;
+    font-size:21px;font-weight:500;
+    letter-spacing:0.01em;
+  }
+  .logo span{color:var(--rose-deep);font-style:italic;}
+  .nav-links{display:flex;gap:34px;align-items:center;}
+  .nav-links a{
+    font-size:14px;font-weight:500;color:var(--ink-soft);
+    position:relative;padding:4px 0;
+  }
+  .nav-links a::after{
+    content:'';position:absolute;bottom:0;left:0;width:0;height:1px;
+    background:var(--ink);transition:width .25s ease;
+  }
+  .nav-links a:hover::after{width:100%;}
+  .nav-cta{display:flex;align-items:center;gap:18px;}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;}
+  .burger span{width:22px;height:2px;background:var(--ink);}
+
+  /* HERO */
+  .hero{
+    padding:96px 0 70px;
+    position:relative;
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(38px,5vw,60px);
+    line-height:1.06;
+    margin:22px 0 24px;
+  }
+  .hero p.lead{
+    font-size:17.5px;color:var(--ink-soft);max-width:460px;margin-bottom:34px;
+  }
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:34px;}
+  .rating-row{
+    display:flex;align-items:center;gap:12px;font-size:14px;color:var(--ink-soft);
+  }
+  .stars{color:var(--rose-deep);letter-spacing:2px;font-size:15px;}
+  .rating-row b{color:var(--ink);}
+
+  /* hero visual: abstract layered portrait card */
+  .hero-visual{
+    position:relative;
+    aspect-ratio:4/5;
+    border-radius:4px;
+    background:linear-gradient(155deg,#DCD3C2 0%, #C9BBA3 55%, #B79E86 100%);
+    overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+  .hero-visual .face-mark{
+    position:absolute;inset:0;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .hero-visual svg{width:62%;opacity:0.9;}
+  .hero-tag{
+    position:absolute;left:24px;bottom:24px;
+    background:var(--porcelain);
+    padding:14px 18px;border-radius:2px;
+    box-shadow:var(--shadow);
+    max-width:210px;
+  }
+  .hero-tag .eyebrow{font-size:10px;margin-bottom:6px;}
+  .hero-tag p{font-size:13px;color:var(--ink-soft);}
+  .hero-badge{
+    position:absolute;top:24px;right:24px;
+    background:var(--ink);color:var(--porcelain);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;letter-spacing:0.08em;
+    padding:8px 12px;border-radius:2px;
+  }
+
+  /* TRUST STRIP */
+  .trust-strip{
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    background:var(--stone-deep);
+  }
+  .trust-inner{
+    display:flex;justify-content:space-between;flex-wrap:wrap;
+    padding:26px 0;gap:24px;
+  }
+  .trust-item{flex:1;min-width:180px;}
+  .trust-item .num{
+    font-family:'Fraunces',serif;font-size:26px;font-weight:500;color:var(--sage-deep);
+  }
+  .trust-item .label{font-size:12.5px;color:var(--ink-soft);margin-top:2px;}
+
+  /* SECTION generic */
+  section{padding:96px 0;}
+  .section-head{
+    max-width:640px;margin:0 0 56px;
+  }
+  .section-head h2{font-size:clamp(28px,3.4vw,40px);margin-top:16px;}
+  .section-head p{color:var(--ink-soft);font-size:16px;margin-top:16px;max-width:520px;}
+  .section-split{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;}
+
+  /* FACE MAP - signature element */
+  .facemap-section{background:var(--ink);color:var(--porcelain);}
+  .facemap-section .eyebrow{color:var(--rose);}
+  .facemap-section .eyebrow::before{background:var(--rose);}
+  .facemap-section h2{color:var(--porcelain);}
+  .facemap-section .section-head p{color:rgba(251,249,245,0.66);}
+  .facemap-grid{
+    display:grid;grid-template-columns:0.9fr 1.1fr;gap:64px;align-items:center;
+  }
+  .facemap-svg-wrap{position:relative;display:flex;justify-content:center;}
+  .facemap-svg-wrap svg{width:100%;max-width:380px;}
+  .hotspot{
+    cursor:pointer;
+    fill:var(--rose);
+    stroke:rgba(251,249,245,0.5);
+    stroke-width:1.5;
+    transition:all .2s ease;
+  }
+  .hotspot:hover, .hotspot.active{
+    fill:var(--porcelain);
+    r:9;
+  }
+  .hotspot-pulse{
+    fill:none;stroke:var(--rose);stroke-width:1;opacity:0.5;
+    animation:pulse 2.6s ease-out infinite;
+  }
+  @keyframes pulse{
+    0%{r:7;opacity:0.55;}
+    100%{r:20;opacity:0;}
+  }
+  .facemap-panel{
+    background:rgba(251,249,245,0.05);
+    border:1px solid rgba(251,249,245,0.14);
+    border-radius:4px;
+    padding:36px;
+    min-height:230px;
+  }
+  .facemap-panel .zone-eyebrow{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;
+    text-transform:uppercase;color:var(--rose);margin-bottom:10px;display:block;
+  }
+  .facemap-panel h3{
+    color:var(--porcelain);font-size:26px;margin-bottom:14px;
+  }
+  .facemap-panel p{
+    color:rgba(251,249,245,0.72);font-size:15.5px;margin-bottom:20px;max-width:460px;
+  }
+  .facemap-panel a.btn-primary{background:var(--rose);color:var(--ink);}
+  .facemap-panel a.btn-primary:hover{background:var(--porcelain);}
+  .facemap-hint{
+    font-size:13px;color:rgba(251,249,245,0.45);margin-top:22px;
+  }
+
+  /* TREATMENTS GRID */
+  .treat-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:var(--line-strong);
+    border:1px solid var(--line-strong);
+  }
+  .treat-card{
+    background:var(--porcelain);
+    padding:38px 32px;
+    transition:background .25s ease;
+  }
+  .treat-card:hover{background:var(--stone);}
+  .treat-num{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--rose-deep);
+    letter-spacing:0.08em;margin-bottom:22px;display:block;
+  }
+  .treat-card h3{font-size:21px;margin-bottom:10px;font-weight:500;}
+  .treat-card p{font-size:14.5px;color:var(--ink-soft);margin-bottom:18px;}
+  .treat-link{
+    font-size:13px;font-weight:600;color:var(--sage-deep);
+    display:inline-flex;align-items:center;gap:6px;
+  }
+
+  /* STORY / CREDENTIAL */
+  .story-section .wrap{
+    display:grid;grid-template-columns:0.85fr 1.15fr;gap:64px;align-items:center;
+  }
+  .story-visual{
+    aspect-ratio:3/4;border-radius:4px;
+    background:linear-gradient(165deg,#DED6C7,#B6A488);
+    position:relative;overflow:hidden;box-shadow:var(--shadow);
+  }
+  .story-visual .since{
+    position:absolute;bottom:0;left:0;right:0;
+    background:rgba(35,31,28,0.82);color:var(--porcelain);
+    padding:20px 24px;
+  }
+  .story-visual .since .yr{font-family:'Fraunces',serif;font-size:30px;}
+  .story-visual .since .sub{font-size:12px;color:rgba(251,249,245,0.65);letter-spacing:0.04em;}
+  .story-copy p{color:var(--ink-soft);font-size:16px;margin-bottom:20px;max-width:520px;}
+  .cred-row{
+    display:flex;gap:28px;margin-top:32px;flex-wrap:wrap;
+  }
+  .cred{border-left:2px solid var(--sage);padding-left:14px;}
+  .cred b{display:block;font-size:14.5px;}
+  .cred span{font-size:12.5px;color:var(--ink-soft);}
+
+  /* TESTIMONIALS */
+  .testi-section{background:var(--stone-deep);}
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  .testi-card{
+    background:var(--porcelain);padding:32px 28px;border-radius:4px;
+    box-shadow:0 12px 30px -20px rgba(35,31,28,0.3);
+  }
+  .testi-card .stars{margin-bottom:16px;display:block;}
+  .testi-card p{font-size:15px;color:var(--ink-soft);margin-bottom:20px;font-style:italic;}
+  .testi-name{font-size:13.5px;font-weight:600;}
+
+  /* PROTOCOLS BANNER */
+  .protocol-banner{
+    background:var(--sage-deep);color:var(--porcelain);
+    border-radius:4px;padding:56px 60px;
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:28px;
+  }
+  .protocol-banner h2{color:var(--porcelain);font-size:clamp(24px,2.8vw,32px);max-width:460px;}
+  .protocol-banner p{color:rgba(251,249,245,0.75);margin-top:12px;max-width:420px;font-size:15px;}
+  .protocol-banner .btn-primary{background:var(--porcelain);color:var(--sage-deep);}
+  .protocol-banner .btn-primary:hover{background:var(--rose);color:var(--ink);}
+
+  /* CONTACT / FOOTER */
+  footer{background:var(--ink);color:var(--porcelain);padding-top:90px;}
+  .footer-top{
+    display:grid;grid-template-columns:1.1fr 0.9fr;gap:64px;padding-bottom:70px;
+    border-bottom:1px solid rgba(251,249,245,0.14);
+  }
+  .footer-top h2{color:var(--porcelain);font-size:clamp(28px,3.2vw,38px);max-width:480px;}
+  .footer-top .lead{color:rgba(251,249,245,0.65);margin-top:16px;max-width:420px;font-size:15.5px;}
+  .contact-list{margin-top:28px;}
+  .contact-list li{
+    padding:16px 0;border-top:1px solid rgba(251,249,245,0.12);
+    display:flex;justify-content:space-between;font-size:14.5px;
+  }
+  .contact-list li:last-child{border-bottom:1px solid rgba(251,249,245,0.12);}
+  .contact-list .k{color:rgba(251,249,245,0.5);}
+  .footer-form{
+    background:rgba(251,249,245,0.05);border:1px solid rgba(251,249,245,0.14);
+    border-radius:4px;padding:32px;
+  }
+  .footer-form .eyebrow{color:var(--rose);margin-bottom:16px;}
+  .footer-form .eyebrow::before{background:var(--rose);}
+  .field{margin-bottom:16px;}
+  .field label{font-size:12.5px;color:rgba(251,249,245,0.55);display:block;margin-bottom:6px;}
+  .field input, .field select{
+    width:100%;background:rgba(251,249,245,0.06);
+    border:1px solid rgba(251,249,245,0.18);
+    color:var(--porcelain);padding:12px 14px;border-radius:2px;
+    font-family:'Inter',sans-serif;font-size:14px;
+  }
+  .field input::placeholder{color:rgba(251,249,245,0.35);}
+  .field select option{color:var(--ink);}
+  .footer-form .btn-primary{width:100%;justify-content:center;background:var(--rose);color:var(--ink);margin-top:6px;}
+  .footer-form .btn-primary:hover{background:var(--porcelain);}
+
+  .footer-bottom{
+    padding:28px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+    font-size:12.5px;color:rgba(251,249,245,0.45);
+  }
+  .footer-bottom .logo{color:var(--porcelain);font-size:16px;}
+  .footer-bottom .logo span{color:var(--rose);}
+
+  @media (max-width:880px){
+    .nav-links{display:none;}
+    .burger{display:flex;}
+    .hero-grid, .facemap-grid, .story-section .wrap, .footer-top{grid-template-columns:1fr;}
+    .treat-grid{grid-template-columns:1fr;}
+    .testi-grid{grid-template-columns:1fr;}
+    .trust-inner{padding:20px 0;}
+    section{padding:64px 0;}
+    .protocol-banner{padding:40px 28px;}
+    .story-visual{order:-1;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a href="#" class="logo">Clínica<span> Curitiba</span></a>
+    <div class="nav-links">
+      <a href="#tratamentos">Tratamentos</a>
+      <a href="#mapa">Diagnóstico facial</a>
+      <a href="#historia">Sobre</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#contato">Contato</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#contato" class="btn btn-primary" style="padding:11px 20px;font-size:13.5px;">Agendar avaliação</a>
+      <button class="burger" aria-label="menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Batel, Curitiba · desde 1999</span>
+        <h1>Harmonia facial que <em>respeita</em> quem você é.</h1>
+        <p class="lead">Trinta anos cuidando de rostos em Curitiba. Avaliação individualizada, protocolos médicos rigorosos e resultados que envelhecem bem com você — nunca contra você.</p>
+        <div class="hero-ctas">
+          <a href="#contato" class="btn btn-primary">Iniciar avaliação online <span class="btn-arrow">→</span></a>
+          <a href="#mapa" class="btn btn-ghost">Ver diagnóstico por região</a>
+        </div>
+        <div class="rating-row">
+          <span class="stars">★★★★★</span>
+          <span><b>4,9/5</b> em mais de 2.400 avaliações no Google</span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <span class="hero-badge">RT · CRBM 123‑PR</span>
+        <div class="face-mark">
+          <svg viewBox="0 0 200 240" fill="none">
+            <ellipse cx="100" cy="115" rx="70" ry="95" stroke="#231F1B" stroke-width="1.2" opacity="0.55"/>
+            <path d="M45 90 Q100 40 155 90" stroke="#231F1B" stroke-width="1.2" opacity="0.55" fill="none"/>
+            <line x1="65" y1="105" x2="85" y2="103" stroke="#231F1B" stroke-width="1.4" opacity="0.55"/>
+            <line x1="115" y1="103" x2="135" y2="105" stroke="#231F1B" stroke-width="1.4" opacity="0.55"/>
+            <path d="M95 130 Q100 145 105 130" stroke="#231F1B" stroke-width="1.2" opacity="0.55" fill="none"/>
+            <path d="M78 165 Q100 178 122 165" stroke="#231F1B" stroke-width="1.4" opacity="0.55" fill="none"/>
+          </svg>
+        </div>
+        <div class="hero-tag">
+          <span class="eyebrow" style="font-size:10px;">Método próprio</span>
+          <p>Protocolo Rejuvetox — bioestimulação e toxina combinadas para um resultado natural, sem "cara de mexido".</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-strip">
+  <div class="wrap trust-inner">
+    <div class="trust-item"><div class="num">29 anos</div><div class="label">Presente no Batel desde 1996</div></div>
+    <div class="trust-item"><div class="num">2.400+</div><div class="label">Avaliações verificadas no Google</div></div>
+    <div class="trust-item"><div class="num">4,9 / 5</div><div class="label">Nota média de satisfação</div></div>
+    <div class="trust-item"><div class="num">100%</div><div class="label">Protocolos sob responsabilidade técnica CRBM</div></div>
+  </div>
+</div>
+
+<section id="mapa" class="facemap-section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Diagnóstico por região</span>
+      <h2>Cada rosto pede <em>uma</em> conversa diferente.</h2>
+      <p>Em vez de vender procedimentos, começamos pela queixa. Toque em uma região do rosto para entender qual caminho costuma trazer o resultado mais natural.</p>
+    </div>
+    <div class="facemap-grid">
+      <div class="facemap-svg-wrap">
+        <svg viewBox="0 0 300 360" fill="none">
+          <ellipse cx="150" cy="175" rx="105" ry="145" stroke="rgba(251,249,245,0.35)" stroke-width="1.2"/>
+          <path d="M60 130 Q150 55 240 130" stroke="rgba(251,249,245,0.35)" stroke-width="1.2" fill="none"/>
+          <path d="M100 145 Q112 138 124 145" stroke="rgba(251,249,245,0.3)" stroke-width="1.2" fill="none"/>
+          <path d="M176 145 Q188 138 200 145" stroke="rgba(251,249,245,0.3)" stroke-width="1.2" fill="none"/>
+          <path d="M145 195 Q150 212 155 195" stroke="rgba(251,249,245,0.3)" stroke-width="1.2" fill="none"/>
+          <path d="M120 250 Q150 268 180 250" stroke="rgba(251,249,245,0.3)" stroke-width="1.2" fill="none"/>
+
+          <!-- Testa/Glabela -->
+          <circle class="hotspot-pulse" cx="150" cy="118" r="7"/>
+          <circle class="hotspot" data-zone="testa" cx="150" cy="118" r="7"/>
+
+          <!-- Olheiras -->
+          <circle class="hotspot-pulse" cx="108" cy="165" r="7" style="animation-delay:.4s"/>
+          <circle class="hotspot" data-zone="olheiras" cx="108" cy="165" r="7"/>
+
+          <!-- Malar -->
+          <circle class="hotspot-pulse" cx="88" cy="205" r="7" style="animation-delay:.8s"/>
+          <circle class="hotspot" data-zone="malar" cx="88" cy="205" r="7"/>
+
+          <!-- Bigode chinês -->
+          <circle class="hotspot-pulse" cx="112" cy="240" r="7" style="animation-delay:1.2s"/>
+          <circle class="hotspot" data-zone="bigode" cx="112" cy="240" r="7"/>
+
+          <!-- Lábios -->
+          <circle class="hotspot-pulse" cx="150" cy="258" r="7" style="animation-delay:1.6s"/>
+          <circle class="hotspot" data-zone="labios" cx="150" cy="258" r="7"/>
+
+          <!-- Mandíbula -->
+          <circle class="hotspot-pulse" cx="205" cy="255" r="7" style="animation-delay:2s"/>
+          <circle class="hotspot" data-zone="mandibula" cx="205" cy="255" r="7"/>
+
+          <!-- Pescoço -->
+          <circle class="hotspot-pulse" cx="150" cy="330" r="7" style="animation-delay:2.4s"/>
+          <circle class="hotspot" data-zone="pescoco" cx="150" cy="330" r="7"/>
+        </svg>
+      </div>
+      <div class="facemap-panel" id="facemap-panel">
+        <span class="zone-eyebrow">Toque em um ponto</span>
+        <h3>Comece pelo que te incomoda</h3>
+        <p>Testa, olheiras, maçãs do rosto, sulcos, lábios, mandíbula ou pescoço — cada região tem um protocolo mais indicado. Explore o mapa ao lado.</p>
+        <span class="facemap-hint">7 regiões mapeadas · avaliação presencial confirma a indicação final</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tratamentos">
+  <div class="wrap">
+    <div class="section-head section-split" style="width:100%;">
+      <div>
+        <span class="eyebrow">Procedimentos</span>
+        <h2>Os mais procurados da clínica</h2>
+      </div>
+      <a href="#contato" class="btn btn-ghost">Ver todos os protocolos</a>
+    </div>
+    <div class="treat-grid">
+      <div class="treat-card">
+        <span class="treat-num">01 · Injetáveis</span>
+        <h3>Toxina Botulínica</h3>
+        <p>Suaviza linhas de expressão na testa, glabela e ao redor dos olhos, preservando a mobilidade natural do rosto.</p>
+        <a href="#contato" class="treat-link">Saiba mais →</a>
+      </div>
+      <div class="treat-card">
+        <span class="treat-num">02 · Preenchimento</span>
+        <h3>Harmonização Facial</h3>
+        <p>Reequilibra proporções entre malar, mandíbula e queixo com ácido hialurônico, sem alterar sua identidade.</p>
+        <a href="#contato" class="treat-link">Saiba mais →</a>
+      </div>
+      <div class="treat-card">
+        <span class="treat-num">03 · Lábios</span>
+        <h3>Diamantação Labial</h3>
+        <p>Define contorno e devolve volume aos lábios com técnica assinatura da clínica, resultado gradual e natural.</p>
+        <a href="#contato" class="treat-link">Saiba mais →</a>
+      </div>
+      <div class="treat-card">
+        <span class="treat-num">04 · Pele</span>
+        <h3>Skinbooster</h3>
+        <p>Hidratação profunda e melhora de textura, indicada para peles com sinais iniciais de desidratação e opacidade.</p>
+        <a href="#contato" class="treat-link">Saiba mais →</a>
+      </div>
+      <div class="treat-card">
+        <span class="treat-num">05 · Laser</span>
+        <h3>Depilação a Laser</h3>
+        <p>Tecnologias Etherea e ZYE para todos os fototipos, com protocolo de sessões personalizado por área.</p>
+        <a href="#contato" class="treat-link">Saiba mais →</a>
+      </div>
+      <div class="treat-card">
+        <span class="treat-num">06 · Colágeno</span>
+        <h3>Bioestimulador de Colágeno</h3>
+        <p>Estimula produção natural de colágeno para firmeza gradual, ideal para sulcos e flacidez leve a moderada.</p>
+        <a href="#contato" class="treat-link">Saiba mais →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="historia" class="story-section">
+  <div class="wrap">
+    <div class="story-visual">
+      <div class="since">
+        <div class="yr">1999</div>
+        <div class="sub">ano de fundação · Av. Sete de Setembro, Batel</div>
+      </div>
+    </div>
+    <div class="story-copy">
+      <span class="eyebrow">Nossa história</span>
+      <h2 style="margin:16px 0 20px;font-size:clamp(26px,3vw,36px);">Quase três décadas cuidando do mesmo bairro.</h2>
+      <p>A Clínica de Curitiba nasceu no coração de Curitiba e cresceu junto com suas pacientes: mães, filhas, e hoje netas continuam a mesma jornada de cuidado. Cada protocolo é construído em cima de avaliação clínica, nunca de modismo.</p>
+      <p>À frente da responsabilidade técnica, uma biomédica especialista com mais de 20 anos dedicados à estética avançada e ao rejuvenescimento facial, criadora de métodos autorais aplicados exclusivamente aqui.</p>
+      <div class="cred-row">
+        <div class="cred"><b>Responsável técnica</b><span>Biomédica · CRBM 8242‑PR</span></div>
+        <div class="cred"><b>Conformidade</b><span>ANVISA · Vigilância Sanitária de Curitiba</span></div>
+        <div class="cred"><b>Atendimento</b><span>Seg–Sex 08h–20h · Sáb 08h–15h</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="depoimentos" class="testi-section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Quem já passou por aqui</span>
+      <h2>Recomendação de quem conhece o Batel</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <span class="stars">★★★★★</span>
+        <p>"Fui muito bem acolhida desde a avaliação. Expliquei minha rotina e a médica ajustou o protocolo ao que eu realmente precisava."</p>
+        <div class="testi-name">Lucas M.</div>
+      </div>
+      <div class="testi-card">
+        <span class="stars">★★★★★</span>
+        <p>"O resultado ficou discreto, do jeito que eu pedi. Ninguém percebeu que fiz procedimento, só que eu estava com a pele melhor."</p>
+        <div class="testi-name">Mariana M.</div>
+      </div>
+      <div class="testi-card">
+        <span class="stars">★★★★★</span>
+        <p>"Equipe atenciosa em todas as etapas, do agendamento ao pós. Voltar não é uma dúvida, é rotina."</p>
+        <div class="testi-name">Sonia R.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="protocol-banner">
+      <div>
+        <span class="eyebrow" style="color:rgba(251,249,245,0.75);">Club do Reju</span>
+        <h2>Protocolos combinados custam menos do que procedimentos avulsos.</h2>
+        <p>Reúna toxina, bioestimulador e skinbooster em um plano contínuo com acompanhamento trimestral.</p>
+      </div>
+      <a href="#contato" class="btn btn-primary">Conhecer os protocolos</a>
+    </div>
+  </div>
+</section>
+
+<footer id="contato">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <span class="eyebrow" style="color:var(--rose);">Agendamento</span>
+        <h2 style="margin-top:16px;">Vamos conversar sobre o seu rosto?</h2>
+        <p class="lead">A primeira etapa é sempre uma avaliação — presencial ou online — antes de qualquer indicação de procedimento.</p>
+        <ul class="contact-list">
+          <li><span class="k">Telefone</span><span>(41) 3026‑2626</span></li>
+          <li><span class="k">WhatsApp</span><span>(41) 98777‑0003</span></li>
+          <li><span class="k">Endereço</span><span>Av. Sete de Setembro, 5881 — Batel, Curitiba/PR</span></li>
+          <li><span class="k">Horário</span><span>Seg–Sex 08h–20h · Sáb 08h–15h</span></li>
+        </ul>
+      </div>
+      <div class="footer-form">
+        <span class="eyebrow">Avaliação online</span>
+        <form onsubmit="event.preventDefault(); this.querySelector('.btn-primary').textContent='Recebemos seu pedido ✓';">
+          <div class="field">
+            <label>Nome</label>
+            <input type="text" placeholder="Seu nome completo" required>
+          </div>
+          <div class="field">
+            <label>WhatsApp</label>
+            <input type="tel" placeholder="(41) 9 0000‑0000" required>
+          </div>
+          <div class="field">
+            <label>O que você quer resolver?</label>
+            <select>
+              <option>Linhas de expressão</option>
+              <option>Olheiras</option>
+              <option>Contorno facial</option>
+              <option>Lábios</option>
+              <option>Pele e textura</option>
+              <option>Ainda não sei</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" type="submit">Solicitar avaliação →</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <a href="#" class="logo">Clínica<span> Batel</span></a>
+      <span>Clínica de Estetica em curitiba · Batel, Curitiba/PR · desde 1996</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const zones = {
+    testa: {
+      eyebrow: 'Testa & glabela',
+      title: 'Toxina Botulínica',
+      text: 'Suaviza linhas dinâmicas entre as sobrancelhas e na testa, preservando a expressividade natural do olhar.'
+    },
+    olheiras: {
+      eyebrow: 'Olheiras',
+      title: 'Preenchimento de Olheiras',
+      text: 'Repõe volume na região periorbital e ilumina o olhar, indicado após avaliação da causa vascular ou de volume.'
+    },
+    malar: {
+      eyebrow: 'Maçãs do rosto',
+      title: 'Preenchimento Malar',
+      text: 'Restaura a sustentação do terço médio do rosto com ácido hialurônico, redefinindo o contorno de forma sutil.'
+    },
+    bigode: {
+      eyebrow: 'Sulco nasolabial',
+      title: 'Bioestimulador de Colágeno',
+      text: 'Estimula a produção natural de colágeno ao longo de semanas, suavizando gradualmente o sulco entre nariz e boca.'
+    },
+    labios: {
+      eyebrow: 'Lábios',
+      title: 'Diamantação Labial',
+      text: 'Define contorno e devolve volume com técnica autoral da clínica, priorizando naturalidade sobre volume excessivo.'
+    },
+    mandibula: {
+      eyebrow: 'Mandíbula & queixo',
+      title: 'Preenchimento Mandibular',
+      text: 'Reconstrói a definição da linha da mandíbula, corrigindo assimetrias e devolvendo ângulo ao terço inferior.'
+    },
+    pescoco: {
+      eyebrow: 'Pescoço',
+      title: 'Fios de Tração + Skinbooster',
+      text: 'Combina sustentação com fios de PDO e hidratação profunda para firmar e melhorar a qualidade da pele do pescoço.'
+    }
+  };
+
+  const panel = document.getElementById('facemap-panel');
+  const hotspots = document.querySelectorAll('.hotspot');
+
+  hotspots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      hotspots.forEach(d => d.classList.remove('active'));
+      dot.classList.add('active');
+      const z = zones[dot.dataset.zone];
+      panel.innerHTML = `
+        <span class="zone-eyebrow">${z.eyebrow}</span>
+        <h3>${z.title}</h3>
+        <p>${z.text}</p>
+        <a href="#contato" class="btn btn-primary">Perguntar sobre este protocolo →</a>
+      `;
+    });
+  });
+
+  // mobile burger -> scroll to contact area for simplicity, toggling a simple stacked menu
+  const burger = document.querySelector('.burger');
+  const navLinks = document.querySelector('.nav-links');
+  burger.addEventListener('click', () => {
+    const open = navLinks.style.display === 'flex';
+    navLinks.style.cssText = open ? '' : 'display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--stone);padding:20px 32px;border-bottom:1px solid var(--line);gap:18px;';
+  });
+</script>
+
+</body>
+</html>

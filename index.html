@@ -615,28 +615,33 @@
       </div>
       <div class="footer-form">
         <span class="eyebrow">Avaliação online</span>
-        <form onsubmit="event.preventDefault(); this.querySelector('.btn-primary').textContent='Recebemos seu pedido ✓';">
-          <div class="field">
-            <label>Nome</label>
-            <input type="text" placeholder="Seu nome completo" required>
-          </div>
-          <div class="field">
-            <label>WhatsApp</label>
-            <input type="tel" placeholder="(41) 9 0000‑0000" required>
-          </div>
-          <div class="field">
-            <label>O que você quer resolver?</label>
-            <select>
-              <option>Linhas de expressão</option>
-              <option>Olheiras</option>
-              <option>Contorno facial</option>
-              <option>Lábios</option>
-              <option>Pele e textura</option>
-              <option>Ainda não sei</option>
-            </select>
-          </div>
-          <button class="btn btn-primary" type="submit">Solicitar avaliação →</button>
-        </form>
+        <form id="formulario">
+    <div class="field">
+        <label>Nome</label>
+        <input type="text" id="nome" placeholder="Seu nome completo" required>
+    </div>
+
+    <div class="field">
+        <label>WhatsApp</label>
+        <input type="tel" id="telefone" placeholder="(41) 9 0000-0000" required>
+    </div>
+
+    <div class="field">
+        <label>O que você quer resolver?</label>
+        <select id="procedimento">
+            <option>Linhas de expressão</option>
+            <option>Olheiras</option>
+            <option>Contorno facial</option>
+            <option>Lábios</option>
+            <option>Pele e textura</option>
+            <option>Ainda não sei</option>
+        </select>
+    </div>
+
+    <button class="btn btn-primary" id="btnEnviar" type="submit">
+        Solicitar avaliação →
+    </button>
+</form>
       </div>
     </div>
     <div class="footer-bottom">
@@ -711,23 +716,37 @@
   });
 
   document.getElementById("formulario").addEventListener("submit", function(e) {
+
     e.preventDefault();
 
     const nome = document.getElementById("nome").value;
     const telefone = document.getElementById("telefone").value;
-    const email = document.getElementById("email").value;
+    const procedimento = document.getElementById("procedimento").value;
 
-    const mensagem =
-`Olá! Tenho interesse na clínica.
+    const botao = document.getElementById("btnEnviar");
 
-Nome: ${nome}
-Telefone: ${telefone}
-E-mail: ${email}`;
+    botao.disabled = true;
+    botao.textContent = "Abrindo WhatsApp...";
+
+    const mensagem = `Olá! Gostaria de agendar uma avaliação.
+
+*Nome:* ${nome}
+
+*WhatsApp:* ${telefone}
+
+*Tenho interesse em:*
+${procedimento}`;
 
     window.open(
-        `https://wa.me/5541999999999?text=${encodeURIComponent(mensagem)}`,
+        `https://wa.me/5541988981523?text=${encodeURIComponent(mensagem)}`,
         "_blank"
     );
+
+    setTimeout(() => {
+        botao.disabled = false;
+        botao.textContent = "Solicitar avaliação →";
+    }, 2500);
+
 });
 </script>
 
